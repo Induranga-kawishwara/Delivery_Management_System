@@ -1,0 +1,23 @@
+.paddingspace {
+    padding-top: 6px;    /* Adjust the top padding value */
+    padding-bottom: 6px;
+  }
+  .options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .options-list li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .options-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
