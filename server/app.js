@@ -1,13 +1,24 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import authRoute from "./routes/auth.js";
+import employeeRoute from "./routes/employee.js";
+import productsRoute from "./routes/products.js";
+import shopRoute from "./routes/shop.js";
+
+dotenv.config();
 
 const app = express();
-const PORT = 6000;
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/auth", authRoute);
+app.use("/employee", employeeRoute);
+app.use("/shop", shopRoute);
+app.use("/product", productsRoute);
 
 mongoose
   .connect(process.env.MONGODB_URI)

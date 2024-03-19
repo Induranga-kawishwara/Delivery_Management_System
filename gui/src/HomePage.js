@@ -38,10 +38,7 @@ const App = () => {
   //Rendering the cart and all the sections
   return (
     <CartProvider>
-      {cartIsShown && (
-        <Cart onCloseCart={onCloseCartHandler} onOrder={onOrderHandler} />
-      )}
-      <TheNav onShowCart={onShowCartHandler} />
+
       <Sections />
       <TheFooter />
     </CartProvider>
