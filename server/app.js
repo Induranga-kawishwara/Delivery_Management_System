@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import bodyParser from "body-parser"; // Import body-parser
+
 import authRoute from "./routes/auth.js";
 import employeeRoute from "./routes/employee.js";
 import productsRoute from "./routes/products.js";
@@ -13,6 +15,8 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors());
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 
 app.use("/auth", authRoute);

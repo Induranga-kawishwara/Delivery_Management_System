@@ -4,58 +4,57 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const getStaff = async (req, res) => {
+const getShopDetails = async (req, res) => {
   try {
     const users = await ShopModel.find();
     res.status(200).json(users);
   } catch (error) {
-    console.error("Error getting users:", error);
-    res.status(500).send("Error getting users");
+    console.error("Error getting Shops' detils:", error);
+    res.status(500).send("Error getting Shops' detils");
   }
 };
 
-const addUser = async (req, res) => {
+const addShopDetails = async (req, res) => {
   try {
-    const { error } = validation.staffValidation();
-    if (error) {
-      return res.status(400).send({ message: error.details[0].message });
-    }
+    // const { error } = validation.staffValidation();
+    // if (error) {
+    //   return res.status(400).send({ message: error.details[0].message });
+    // }
 
-    const AddminId = await ShopModel.findOne({
-      staffID: req.body.staffID,
+    const ShopId = await ShopModel.findOne({
+      shopId: req.body.shopId,
     });
-    const user = await ShopModel.findOne({ email: req.body.email });
-    if (AddminId)
-      return res
-        .status(409)
-        .send({ message: "Addmin with given id already Exist!" });
+    const phoneNo = await ShopModel.findOne({ shopNo: req.body.shopNo });
+    if (ShopId)
+      return res.status(409).send({ message: "This shop id already Exist!" });
 
-    if (user)
+    if (phoneNo)
       return res
         .status(409)
-        .send({ message: "User with given email already Exist!" });
+        .send({ message: "This phone number already Exist!" });
     await new ShopModel(req.body).save();
-    res.status(201).send("User saved successfully!");
+    res.status(201).send("Shop saved successfully!");
   } catch (error) {
-    console.error("Error adding user:", error);
-    res.status(500).send("Error adding user");
+    console.error("Error adding Shop:", error);
+    console.log(req.body);
+    res.status(500).send("Error adding Shop");
   }
 };
 
-const deleteUser = async (req, res) => {
+const DeleteShopDetails = async (req, res) => {
   const userID = req.params.id;
   console.log(userID);
   try {
     const deleteUser = await ShopModel.findById(userID);
 
     if (!deleteUser) {
-      return res.status(404).send("User not found");
+      return res.status(404).send("Shop not found");
     }
-    res.status(200).send("User deleted successfully");
+    res.status(200).send("Shop deleted successfully");
   } catch (error) {
-    console.error("Error deleting user:", error);
-    res.status(500).send("Error deleting user");
+    console.error("Error deleting Shop:", error);
+    res.status(500).send("Error deleting Shop");
   }
 };
 
-export { getStaff, addUser, deleteUser };
+export { getShopDetails, addShopDetails, DeleteShopDetails };

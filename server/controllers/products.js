@@ -16,16 +16,11 @@ const getProducts = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    const { error } = validation.staffValidation();
-    if (error) {
-      return res.status(400).send({ message: error.details[0].message });
-    }
-
-    const AddminId = await ShopModel.findOne({
+    const ProductName = await ShopModel.findOne({
       staffID: req.body.staffID,
     });
     const user = await ShopModel.findOne({ email: req.body.email });
-    if (AddminId)
+    if (ProductName)
       return res
         .status(409)
         .send({ message: "Addmin with given id already Exist!" });

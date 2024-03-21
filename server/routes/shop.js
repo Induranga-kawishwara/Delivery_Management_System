@@ -1,10 +1,14 @@
 import express from "express";
-import { getStaff, addUser, deleteUser } from "../controllers/shops.js";
+import {
+  getShopDetails,
+  addShopDetails,
+  DeleteShopDetails,
+} from "../controllers/shops.js";
 
 const router = express.Router();
 
-router.get("/", getStaff);
-router.post("/", addUser);
-router.delete("/:id", deleteUser);
+router.get("/", getShopDetails);
+router.post("/", addShopDetails);
+router.delete("/:id", DeleteShopDetails);
 
 export default router;

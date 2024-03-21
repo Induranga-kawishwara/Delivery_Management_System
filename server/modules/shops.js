@@ -41,6 +41,10 @@ const ShopsSchema = new Schema({
     type: String,
     require: true,
   },
+  img: {
+    type: String,
+    require: true,
+  },
 });
 
 export default model("shops", ShopsSchema);
