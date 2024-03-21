@@ -1,7 +1,7 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import TheFooter from "../../components/Footer/TheFooter";
 import TheNav from "../../components/Header/TheNav";
-import "./style.css"
+import "./stylereg.css"
 import React, { Component,ChangeEvent  ,useState } from "react";
 
 export default function Profile(){
@@ -83,7 +83,8 @@ const EmployeeSubmit = (e) => {
     return(
         <div >
       <TheNav/>
-       <div  style={{ marginTop: '120px', marginBottom: '20px', marginLeft: '40px', marginRight: '40px'}}>
+      <div className="center-container">
+       <div className="form-box" style={{ marginTop: '120px', marginBottom: '20px', marginLeft: '40px', marginRight: '40px'}}>
             <form onSubmit={EmployeeSubmit}>
                 <h1>Register </h1><br/>
 
@@ -287,7 +288,7 @@ const EmployeeSubmit = (e) => {
                 </div>
             </form>
             </div>
-            
+            </div>
         <TheFooter />
         </div>
         

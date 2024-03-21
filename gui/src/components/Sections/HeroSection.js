@@ -2,7 +2,7 @@ import React from "react";
 import TheButton from "../Ui/TheButton";
 import classes from "./HeroSection.module.css";
 import { Row, Col, Container } from "react-bootstrap";
-import { Link } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import FoodImage from "../../assets/image/FoodImage.png";
 
@@ -27,16 +27,15 @@ const HeroSection = () => {
               Bringing Flavor to Your Fingertips: Elevate Your Culinary Experience with Premium Spices Anytime, Anywhere
               </p>
 
-              <Link
-                className={classes.order_button}
-                to="dishes"
-                spy={true}
-                smooth={true}
-                offset={-50}
-                duration={500}
-              >
+              <RouterLink
+                  to="/cartlog"
+                  spy={true}
+                  smooth={true}
+                  offset={-50}
+                  duration={500}
+                >
                 <TheButton>Order Now</TheButton>
-              </Link>
+                </RouterLink>
             </div>
           </Col>
           <Col lg={6} className="p-0">

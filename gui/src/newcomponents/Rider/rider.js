@@ -3,6 +3,7 @@ import TheFooter from "../footer/TheFooter";
 import TheNav from "../navbar/TheNav";
 import "./style.css";
 import axios from "axios";
+import RiderCart from "../Cart/cartmain";
 
 const Profile = () => {
   const [query, setQuery] = useState("");
@@ -186,7 +187,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="paddingspace">
+          {/* <div className="paddingspace">
             <div className="form-group row">
               <div className="col-sm-10">
                 <button type="submit" className="btn btn-primary">
@@ -194,9 +195,11 @@ const Profile = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
+
+      <RiderCart/>
 
       <TheFooter />
     </div>

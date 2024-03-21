@@ -1,73 +1,65 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import TheFooter from "../../components/Footer/TheFooter";
 import TheNav from "../../components/Header/TheNav";
-import "./style.css";
+import "./stylelog.css";
 import { Link as RouterLink } from "react-router-dom";
 
-
 const Profile = () => {
+    
+  
+    return (
+      <div>
+        <TheNav/>
+        <div className="form-box" style={{ marginTop: '120px' , marginBottom: '20px'}}>
+          <form>
+            <h1 className="form-title">Login</h1>
+            
+            
+            <div className="form-group paddingspace">
+              <label htmlFor="inputEmail3" className="col-form-label">Email</label>
+              <input type="email" className="form-control" id="inputEmail3" placeholder="Email"/>
+            </div>
 
-    return(
-        <div >
-      <TheNav/>
-       <div  style={{ marginTop: '120px', marginBottom: '20px', marginLeft: '40px', marginRight: '40px'}}>
-            <form>
-                <h1>Login</h1><br/>
-
-                <div className ="paddingspace">
-                <div className="form-group row">
-                    <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
-                    <div className="col-sm-10">
-                        <input type="email" className="form-control" id="inputEmail3" placeholder="Email"/>
-                    </div>
-                </div>
-                </div>
-                
-                <div className ="paddingspace">
-                <div className="form-group row">
-                    <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
-                    <div className="col-sm-10">
-                        <input type="password" className="form-control" id="inputPassword3" placeholder="Password"/>
-                    </div>
-                </div>
-                </div>
-                
-<h1> </h1>
-
-
-                <div className="form-group row">
-                    <div className="col-sm-10">
-                        <RouterLink
+            <div className="form-group paddingspace">
+              <label htmlFor="inputPassword3" className="col-form-label">Password</label>
+              <input type="password" className="form-control" id="inputPassword3" placeholder="Password"/>
+            </div>
+            
+            <div className="form-group remember-me-checkbox">
+              <input type="checkbox" id="rememberPassword"/>
+              <label htmlFor="rememberPassword" className="col-form-label"> Remember password</label>
+            </div>
+            
+            <RouterLink
                         to="/cart"
                         spy={true}
                         smooth={true}
                         offset={-50}
                         duration={500}
                         >
-                            <button type="submit" className="btn btn-primary">Log in</button>
-                        </RouterLink>
-                        <RouterLink
-                            to="/cartreg"
-                            spy={true}
-                            smooth={true}
-                            offset={-50}
-                            duration={500}
-                            >
-                        <p>Don't have an account? Register</p>
-                        </RouterLink>
-                    </div>
-                </div>
-
-
-
-
-            </form>
-            </div>
+            <button type="button" className="btn btn-login">Log in</button>
             
-        <TheFooter />
-        </div>
+        </RouterLink>
         
-    )
-}
+            <button type="button" className="btn btn-google">Sign in with Google</button>
+            
+            
+            <div className="sign-up-text">
+            <RouterLink
+                        to="/cartreg"
+                        spy={true}
+                        smooth={true}
+                        offset={-50}
+                        duration={500}
+                        >
+        Don't have an account? Register
+        </RouterLink>
+    </div>
+    </form>
+    </div>
+    <TheFooter />
+    </div>
+    );
+    };
 
 export default Profile;
