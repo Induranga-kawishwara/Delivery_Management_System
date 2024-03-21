@@ -4,6 +4,7 @@ import TheNav from "../navbar/TheNav";
 import React, { useState } from "react";
 import "./style.css";
 import axios from "axios";
+import Image from "../../imageConverter/imageConverter";
 
 export default function Profile() {
   const [shopname, setShopname] = useState("");
@@ -18,11 +19,13 @@ export default function Profile() {
   const [shopregdate, setRegdate] = useState("");
   const [typeresturent, setTypeResturent] = useState("");
   const [checked, setIsCheckedShop] = useState("");
+  const [img, setImg] = useState("");
 
   const [file, setFile] = useState(" ");
-  function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+  async function handleChange(e) {
+    setFile(await Image(e.target.files[0]));
+    // console.log(e.target.files);
+    setImg(URL.createObjectURL(e.target.files[0]));
   }
 
   const RegisterShop = (e) => {
@@ -37,6 +40,7 @@ export default function Profile() {
       location: shoplocation,
       regisDate: new Date(shopregdate),
       TypeRtestent: typeresturent,
+      img: file,
     };
 
     // Send the POST request
@@ -56,14 +60,17 @@ export default function Profile() {
         setRegdate("");
         setTypeResturent("");
         setIsCheckedShop("");
+        setFile("");
         alert(response.data);
       })
       .catch((error) => {
-        console.error("Error posting data:", error);
+        console.log(file);
+        alert(error.response.data.message);
       });
   };
 
-  const shopsubmit = () => {
+  const shopsubmit = (e) => {
+    e.preventDefault();
     if (
       !shopname &&
       !stitle &&
@@ -345,8 +352,12 @@ export default function Profile() {
                   Image of Shop
                 </label>
                 <div className="col-sm-10">
-                  <input type="file" onChange={handleChange} />
-                  <img src={file} />
+                  <input
+                    type="file"
+                    accept=".jpeg, .png, .jpg"
+                    onChange={handleChange}
+                  />
+                  <img src={img} />
                 </div>
               </div>
             </div>
