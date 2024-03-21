@@ -14,16 +14,6 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const data = [
-  //   "Apple",
-  //   "Banana",
-  //   "Orange",
-  //   "Mango",
-  //   "Pineapple",
-  //   "Watermelon",
-  //   // Add more options as needed
-  // ];
-
   useEffect(() => {
     const fetchShopDetails = async () => {
       try {
@@ -47,11 +37,6 @@ const Profile = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  // // Filter options based on the input
-  // const filteredOptions = data.filter((option) =>
-  //   option.toLowerCase().includes(query.toLowerCase())
-  // );
 
   return (
     <div>
@@ -83,12 +68,11 @@ const Profile = () => {
                     onFocus={() => setShowDropdown(true)}
                     onChange={(e) => {
                       setQuery(e.target.value);
-                      setShowDropdown(true); // Show dropdown while typing
+                      setShowDropdown(true);
                     }}
                     onBlur={() => {
                       // Optionally hide dropdown when input loses focus
-                      // Note: This might conflict with selecting an option, so you might need to adjust the logic
-                      // setTimeout(() => setShowDropdown(false), 100); // Delay hiding to allow click event to register
+                      // setTimeout(() => setShowDropdown(false), 100);
                     }}
                   />
                   {showDropdown && (
@@ -103,8 +87,7 @@ const Profile = () => {
                             setShowDropdown(false);
                           }}
                         >
-                          {shop.shopName}{" "}
-                          {/* Assuming "shopName" is the property to be displayed */}
+                          {shop.shopName}
                         </li>
                       ))}
                     </ul>
@@ -130,9 +113,12 @@ const Profile = () => {
               </label>
               <div className="col-sm-10">
                 <input
-                  type="name"
+                  type="text"
                   className="form-control"
-                  value={selectedShopDetails.shopName}
+                  placeholder="Shop Name"
+                  value={
+                    selectedShopDetails ? selectedShopDetails.shopName : ""
+                  }
                   readOnly={true}
                   id="inputName"
                 />
@@ -147,10 +133,13 @@ const Profile = () => {
               </label>
               <div className="col-sm-10">
                 <input
-                  type="Phonenumber"
+                  type="text"
                   className="form-control"
                   id="inputEmail3"
-                  value={selectedShopDetails.phoneNum}
+                  placeholder="Phone Number"
+                  value={
+                    selectedShopDetails ? selectedShopDetails.phoneNum : ""
+                  }
                   readOnly={true}
                 />
               </div>
@@ -164,10 +153,13 @@ const Profile = () => {
               </label>
               <div className="col-sm-10">
                 <input
-                  type="name"
+                  type="text"
                   className="form-control"
                   id="inputAddress"
-                  value={selectedShopDetails.location}
+                  placeholder="Location"
+                  value={
+                    selectedShopDetails ? selectedShopDetails.location : ""
+                  }
                   readOnly={true}
                 />
               </div>
@@ -181,10 +173,13 @@ const Profile = () => {
               </label>
               <div className="col-sm-10">
                 <input
-                  type="name"
+                  type="text"
                   className="form-control"
                   id="inputAddress"
-                  value={selectedShopDetails.TypeRtestent}
+                  placeholder="Type Of Rrestent"
+                  value={
+                    selectedShopDetails ? selectedShopDetails.TypeRtestent : ""
+                  }
                   readOnly={true}
                 />
               </div>
