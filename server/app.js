@@ -2,10 +2,12 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import bodyParser from "body-parser"; // Import body-parser
+import bodyParser from "body-parser";
 
 import authRoute from "./routes/auth.js";
 import employeeRoute from "./routes/employee.js";
+import userRoute from "./routes/user.js";
+
 import productsRoute from "./routes/products.js";
 import shopRoute from "./routes/shop.js";
 
@@ -23,6 +25,7 @@ app.use("/auth", authRoute);
 app.use("/employee", employeeRoute);
 app.use("/shop", shopRoute);
 app.use("/product", productsRoute);
+app.use("/user", userRoute);
 
 mongoose
   .connect(process.env.MONGODB_URI)

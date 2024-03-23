@@ -1,7 +1,8 @@
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import Joi from "joi";
 import jwt from "../jwt/jwt.js";
 import adminModel from "../modules/admin.js";
+import EmployeeModel from "../modules/employee.js";
 
 const authuser = async (req, res) => {
   try {
@@ -10,18 +11,29 @@ const authuser = async (req, res) => {
       return res.status(400).send({ message: error.details[0].message });
 
     const user = await adminModel.findOne({ email: req.body.email });
-    if (!user)
+    const employee = await EmployeeModel.findOne({ email: req.body.email });
+
+    if (!user && !employee)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
-    // const validPassword = await bcrypt.compare(
-    //   req.body.password,
-    //   user.password
-    // );
-    if (!req.body.password === user.password)
+    let validPassword = false;
+
+    if (user) {
+      validPassword = req.body.password;
+    }
+    if (employee) {
+      validPassword = await bcrypt.compare(
+        req.body.password,
+        employee.password
+      );
+    }
+
+    if (!validPassword)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
-    const token = jwt(adminModel);
-    res.status(200).send({ data: token, message: "logged in successfully" });
+    const token = jwt(user ? user : employee);
+
+    res.status(200).send({ data: token, message: "Logged in successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal Server Error" });

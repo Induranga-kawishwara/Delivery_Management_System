@@ -83,12 +83,12 @@ const Profile = () => {
                           key={index}
                           onClick={() => {
                             setSelectedOption(shop.shopName);
-                            setQuery(shop.shopName);
+                            setQuery(shop.shopId);
                             setSelectedShopDetails(shop);
                             setShowDropdown(false);
                           }}
                         >
-                          {shop.shopName}
+                          {shop.shopId}
                         </li>
                       ))}
                     </ul>
@@ -199,7 +199,7 @@ const Profile = () => {
         </form>
       </div>
 
-      <RiderCart/>
+      <RiderCart />
 
       <TheFooter />
     </div>

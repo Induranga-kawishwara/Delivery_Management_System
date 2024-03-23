@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import classes from "./Footer.module.css";
 import Logo from "../../assets/Logo/Logo.png";
 import { Link } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom";
 import insta from "../../assets/Icon/instagram.png";
 import twitter from "../../assets/Icon/twitter.png";
 import fb from "../../assets/Icon/facebook.png";
@@ -29,7 +29,7 @@ const Footer = () => {
                     className={classes.navbar_brand}
                     src={Logo}
                     alt="logo"
-                    style={{ width: '250px', height: 'auto' }}
+                    style={{ width: "250px", height: "auto" }}
                   ></img>
                 </Link>
               </div>
@@ -59,54 +59,52 @@ const Footer = () => {
               <h3>About</h3>
 
               <RouterLink
-                  to="/log"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                >
-              <p>Register</p>
+                to="/rider"
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+              >
+                <p>Register</p>
               </RouterLink>
               <RouterLink
-                  to="/log"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                >
-              <p>Login To System</p>
+                to="/log"
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+              >
+                <p>Login To System</p>
               </RouterLink>
               <RouterLink
-                  to="/"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                >
-              <p>Sample</p>
-                </RouterLink>
-            
-                <RouterLink
-                  to="/"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                >
-              <p>Sample</p>
+                to="/"
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+              >
+                <p>Sample</p>
               </RouterLink>
 
               <RouterLink
-                  to="/"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                >
-              <p>Sample</p>
+                to="/"
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+              >
+                <p>Sample</p>
               </RouterLink>
-              
 
+              <RouterLink
+                to="/"
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+              >
+                <p>Sample</p>
+              </RouterLink>
             </div>
           </Col>
 

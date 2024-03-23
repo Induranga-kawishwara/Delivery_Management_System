@@ -21,9 +21,7 @@ const indexRoutes = [
   { pathname: "/cart", name: "cart", component: <Cart /> },
   { pathname: "/ridercart", name: "cart", component: <RiderCart /> },
   { pathname: "/cartlog", name: "cartlog", component: <Cartlog /> },
-  { pathname: "/cartreg", name: "cartreg", component: <Cartreg /> }
-  
-  
+  { pathname: "/cartreg", name: "cartreg", component: <Cartreg /> },
 ];
 
 export default indexRoutes;
