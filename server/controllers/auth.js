@@ -15,38 +15,21 @@ const authuser = async (req, res) => {
       return res.status(400).send({ message: error.details[0].message });
 
     let user;
-
     let validPassword = false;
 
     if (req.body.from === "user") {
-      const normalUser = await UserModel.findOne({ email: req.body.email });
-
-      if (!normalUser) {
-        return res.status(401).send({ message: "Invalid Email or Password" });
-      }
-      validPassword = await bcrypt.compare(
-        req.body.password,
-        normalUser.password
-      );
-      user = normalUser;
+      user = await UserModel.findOne({ email: req.body.email });
+      validPassword = await bcrypt.compare(req.body.password, user.password);
     } else if (req.body.from === "employee") {
-      const employee = await EmployeeModel.findOne({ email: req.body.email });
-      if (!employee) {
-        return res.status(401).send({ message: "Invalid Email or Password" });
-      }
-      validPassword = await bcrypt.compare(
-        req.body.password,
-        employee.password
-      );
-      user = employee;
+      user = await EmployeeModel.findOne({ email: req.body.email });
+      validPassword = await bcrypt.compare(req.body.password, user.password);
     } else {
-      const admin = await adminModel.findOne({ email: req.body.email });
-      if (!admin) {
-        return res.status(401).send({ message: "Invalid Email or Password" });
-      }
-      validPassword = req.body.password === admin.password;
-      user = admin;
+      user = await adminModel.findOne({ email: req.body.email });
+      validPassword = req.body.password === user.password;
     }
+
+    if (!user)
+      return res.status(401).send({ message: "Invalid Email or Password" });
 
     if (!validPassword)
       return res.status(401).send({ message: "Invalid Password" });
