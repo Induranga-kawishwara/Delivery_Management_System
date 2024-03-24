@@ -4,7 +4,7 @@ import "./itemcard.css";
 
 const ItemCard = (props) => {
   const { addItem } = useCart();
-  const [sizes, setSizes] = useState([{ size: "", shopprice: "" }]);
+  const [sizes, setSizes] = useState([{ size: "", shopPrice: "" }]);
   // const [selectedSize, setSelectedSize] = useState(sizes ? sizes[0].size : " ");
   const [selectedSize, setSelectedSize] = useState({ size: "", shopPrice: "" });
 
@@ -71,6 +71,12 @@ const ItemCard = (props) => {
   //   });
   // };
 
+  const handleSelectSize = (size, price) => {
+    setSelectedSize({ size: size, shopPrice: price });
+
+    console.log(selectedSize);
+  };
+
   return (
     // <></>
     <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
@@ -102,7 +108,7 @@ const ItemCard = (props) => {
                 <button
                   key={indx}
                   className="custom-dropdown-item"
-                  onClick={() => setSelectedSize(item.size, item.shopprice)}
+                  onClick={() => handleSelectSize(item.size, item.shopPrice)}
                 >
                   {item.size}
                 </button>
