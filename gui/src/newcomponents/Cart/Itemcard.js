@@ -1,13 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
-// import "./itemcard.css";
+import "./itemcard.css";
+import axios from "axios";
 
 const ItemCard = (props) => {
-  const { addItem } = useCart();
+  const { addItem, emptyCart } = useCart();
   const [sizes, setSizes] = useState([{ size: "", shopPrice: "" }]);
   const [selectedSize, setSelectedSize] = useState({ size: "", shopPrice: "" });
+  const [cart, setCart] = useState([{}]);
+
+  const fetchCart = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/cart/${localStorage.getItem("riderId")}`
+      );
+      setCart(response.data);
+      console.log(cart);
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+      throw error;
+    }
+  };
+  const preAddToCart = () => {
+    console.log("1");
+
+    cart.forEach((item) => {
+      console.log("2");
+      addItem({
+        img: item.details.img,
+        title: item.details.title,
+        size: item.details.size,
+        price: item.details.price,
+        id: item.details.id,
+        quantity: item.details.quantity,
+      });
+    });
+  };
 
   useEffect(() => {
+    emptyCart();
+    fetchCart();
+    console.log("ss");
+    console.log(cart);
+    preAddToCart();
+
     const extractedSizes = props.data.sizes.map((item) => ({
       size: item.size,
       shopPrice: item.shopPrice,
@@ -17,19 +53,33 @@ const ItemCard = (props) => {
       prev.price < current.price ? prev : current
     );
     setSelectedSize(lowestPriceSize);
-    console.log(sizes);
-    console.log(selectedSize);
-    console.log(sizes);
   }, [props.data.sizes]);
 
-  const handleAddToCart = () => {
-    const price = selectedSize.shopPrice;
+  const handleAddToCart = async () => {
     addItem({
+      img: "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg",
       title: props.data.productName,
       size: selectedSize.size,
       price: selectedSize.shopPrice,
       id: props.data._id + "-" + selectedSize.size,
     });
+    const productData = {
+      id: localStorage.getItem("riderId"),
+      title: props.data.productName,
+      size: selectedSize.size,
+      price: selectedSize.shopPrice,
+      image: "https://example.com/image.jpg",
+      productid: props.data._id + "-" + selectedSize.size,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/cart",
+        productData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
   };
 
   const handleSelectSize = (size, price) => {

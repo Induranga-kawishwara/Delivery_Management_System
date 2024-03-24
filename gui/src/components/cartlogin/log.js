@@ -25,6 +25,7 @@ const Profile = () => {
         setEmail("");
         setPassword("");
         localStorage.setItem("usertoken", response.data.data);
+        localStorage.setItem("userId", response.data.id);
         alert(response.data.message);
         window.location = "/cart";
       })

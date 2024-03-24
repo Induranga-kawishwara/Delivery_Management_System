@@ -10,6 +10,7 @@ import userRoute from "./routes/user.js";
 
 import productsRoute from "./routes/products.js";
 import shopRoute from "./routes/shop.js";
+import cartRoute from "./routes/cart.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/employee", employeeRoute);
 app.use("/shop", shopRoute);
 app.use("/product", productsRoute);
 app.use("/user", userRoute);
+app.use("/cart", cartRoute);
 
 mongoose
   .connect(process.env.MONGODB_URI)

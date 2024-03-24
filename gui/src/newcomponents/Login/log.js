@@ -23,7 +23,7 @@ const Profile = () => {
         setEmail(" ");
         setPassword("");
         localStorage.setItem("ridertoken", response.data.data);
-        alert(response.data.message);
+        localStorage.setItem("riderId", response.data.id);
         window.location = "/rider";
       })
       .catch((error) => {
