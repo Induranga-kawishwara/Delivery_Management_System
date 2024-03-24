@@ -18,27 +18,28 @@ import Cartreg from "./components/cartregistr/reg";
 import RiderCart from "./newcomponents/Cart/cartmain";
 
 const App = () => {
-  const user = localStorage.getItem("token");
+  const ridertoken = localStorage.getItem("ridertoken");
+  const usertoken = localStorage.getItem("usertoken");
 
   return (
     <Router>
       <Routes>
-        {user && <Route path="/rider" exact element={<Rider />} />}
+        {usertoken && <Route path="/cart" exact element={<Cart />} />}
+        {ridertoken && <Route path="/rider" exact element={<Rider />} />}
         <Route path="/" exact element={<Main />} />
         <Route path="/regemp" exact element={<Reg />} />
         <Route path="/log" exact element={<Log />} />
+        <Route path="/cartlog" exact element={<Cartlog />} />
         <Route path="/shopreg" exact element={<ShopReg />} />
         <Route path="/productreg" exact element={<ProReg />} />
         <Route path="/empreglog" exact element={<EmpRegLog />} />
-        {/* <Route
-          exact
-          path="/rider"
-          element={token ? <Rider /> : <Navigate to="/log" />}
-        /> */}
-        <Route path="/cart" exact element={<Cart />} />
         <Route path="/ridercart" exact element={<RiderCart />} />
-        <Route path="/cartlog" exact element={<Cartlog />} />
         <Route path="/cartreg" exact element={<Cartreg />} />
+        <Route
+          path="/cart"
+          exact
+          element={<Navigate replace to="/cartlog" />}
+        />
         <Route path="/rider" exact element={<Navigate replace to="/log" />} />
       </Routes>
     </Router>

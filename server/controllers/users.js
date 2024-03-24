@@ -1,5 +1,4 @@
 import UserModel from "../modules/user.js";
-// import employeeValidation from "../validations/validation.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 

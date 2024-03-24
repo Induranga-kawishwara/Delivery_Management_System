@@ -21,7 +21,7 @@ const Profile = () => {
         console.log("Login successful:", response.data);
         setEmail(" ");
         setPassword("");
-        localStorage.setItem("token", response.data.data);
+        localStorage.setItem("ridertoken", response.data.data);
         alert(response.data.message);
         window.location = "/rider";
       })
