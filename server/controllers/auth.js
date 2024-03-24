@@ -7,19 +7,20 @@ import UserModel from "../modules/user.js";
 
 const authuser = async (req, res) => {
   try {
-    // const { error } = validate(req.body);
-    // if (error)
-    //   return res.status(400).send({ message: error.details[0].message });
+    const { error } = validate({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    if (error)
+      return res.status(400).send({ message: error.details[0].message });
 
     let user;
 
     let validPassword = false;
 
     if (req.body.from === "user") {
-      console.log("Ffff");
       const normalUser = await UserModel.findOne({ email: req.body.email });
-      console.log(normalUser.password);
-      console.log(req.body.password);
+
       if (!normalUser) {
         return res.status(401).send({ message: "Invalid Email or Password" });
       }
@@ -37,9 +38,6 @@ const authuser = async (req, res) => {
         req.body.password,
         employee.password
       );
-      // if (!validPassword) {
-      //   return res.status(401).send({ message: "Invalid Email or Password" });
-      // }
       user = employee;
     } else {
       const admin = await adminModel.findOne({ email: req.body.email });
@@ -47,9 +45,6 @@ const authuser = async (req, res) => {
         return res.status(401).send({ message: "Invalid Email or Password" });
       }
       validPassword = req.body.password === admin.password;
-      // if (!validPassword) {
-      //   return res.status(401).send({ message: "Invalid Email or Password" });
-      // }
       user = admin;
     }
 

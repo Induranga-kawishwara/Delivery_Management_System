@@ -22,12 +22,11 @@ const Profile = () => {
       .post("http://localhost:5000/auth", payload)
       .then((response) => {
         console.log("Login successful:", response.data);
-        setEmail(""); // Clear email state
-        setPassword(""); // Clear password state
+        setEmail("");
+        setPassword("");
         localStorage.setItem("usertoken", response.data.data);
         alert(response.data.message);
         window.location = "/cart";
-        console.log("fkkk");
       })
       .catch((error) => {
         console.error("Error login:", error);

@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-scroll";
 import classes from "./TheNavbar.module.css";
 import Logo from "../../assets/Logo/Logo.png";
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink } from "react-router-dom";
 
 const TheNavbar = (props) => {
   //Layout and structure of the navbar to be passed to THENAV component
@@ -19,9 +19,18 @@ const TheNavbar = (props) => {
         data-aos-duration="2000"
       >
         <Navbar.Brand className={classes.navbar_brand}>
-          
-        <RouterLink to="/" spy={true} smooth={true} offset={-50} duration={500}>
-            <img src={Logo} alt="My logo" style={{ width: '200px', height: 'auto' }}></img>
+          <RouterLink
+            to="/"
+            spy={true}
+            smooth={true}
+            offset={-50}
+            duration={500}
+          >
+            <img
+              src={Logo}
+              alt="My logo"
+              style={{ width: "200px", height: "auto" }}
+            ></img>
           </RouterLink>
         </Navbar.Brand>
         <Navbar.Toggle
@@ -93,14 +102,14 @@ const TheNavbar = (props) => {
               </Link>
             </Nav.Link>
             <Nav.Link href="#buttons" className={`${classes.nav__link}`}>
-               <RouterLink
-                  to="/cartlog"
-                  spy={true}
-                  smooth={true}
-                  offset={-50}
-                  duration={500}
-                >
-              <NavCartButton onClick={props.onShowCart} />
+              <RouterLink
+                to="/cart"
+                spy={true}
+                smooth={true}
+                offset={-50}
+                duration={500}
+              >
+                <NavCartButton onClick={props.onShowCart} />
               </RouterLink>
             </Nav.Link>
           </Nav>
