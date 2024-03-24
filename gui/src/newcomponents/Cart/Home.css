@@ -1,61 +1,63 @@
 /* Style for the container */
-.container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  /* Style for each item card */
-  .item-card {
-    background: #fff; /* Change to the color you need */
-    border: 1px solid #ddd; /* Change to the color you need */
-    border-radius: 8px;
-    overflow: hidden;
-    width: 300px; /* Adjust the width as necessary */
-  }
-  
-  .item-card img {
-    max-width: 100%;
-    display: block;
-  }
-  
-  /* Style for the text section */
-  .item-card .text-section {
-    padding: 15px;
-  }
-  
-  .item-card h5 { /* Style for the title */
-    font-size: 1.2em;
-    margin-bottom: 10px;
-  }
-  
-  .item-card p { /* Style for the description */
-    font-size: 1em;
-    margin-bottom: 10px;
-  }
-  
-  /* Style for the price */
-  .price {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  /* Style for the add button */
-  .add-button {
-    background-color: #ff4500; /* Adjust the color as necessary */
-    color: white;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 15px;
-  }
-  
-  .add-button:hover {
-    background-color: #e33e00; /* Darker shade for hover effect */
-  }
-.cart{
+/* .container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+} */
+
+/* Style for each item card */
+.item-card {
+  background: #fff; /* Change to the color you need */
+  border: 1px solid #ddd; /* Change to the color you need */
+  border-radius: 8px;
+  overflow: hidden;
+  width: 300px; /* Adjust the width as necessary */
+}
+
+.item-card img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Style for the text section */
+.item-card .text-section {
+  padding: 15px;
+}
+
+.item-card h5 {
+  /* Style for the title */
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.item-card p {
+  /* Style for the description */
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+/* Style for the price */
+.price {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style for the add button */
+.add-button {
+  background-color: #ff4500; /* Adjust the color as necessary */
+  color: white;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.add-button:hover {
+  background-color: #e33e00; /* Darker shade for hover effect */
+}
+.cart {
   padding: 10px 20px;
   border: none;
   margin: 3px 10px;
@@ -64,38 +66,38 @@
   color: white;
   display: block;
   margin-left: auto;
-    margin-right: auto;
+  margin-right: auto;
 }
-.cart-actions {
+/* .cart-actions {
   display: flex;
-  justify-content: center; /* This centers the children horizontally */
-  align-items: center; /* This centers the children vertically (optional in this case) */
-}
+  justify-content: center; 
+  align-items: center; 
+} */
 
-
-  
-  /* Make sure your Itemcard component has a className that matches the styles above */
-  @media screen and (max-width: 600px) {
+/* Make sure your Itemcard component has a className that matches the styles above */
+@media screen and (max-width: 600px) {
   .cart-item {
     display: block;
     width: 100%;
   }
-  
+
   .cart-item img {
     width: 100%;
     height: auto;
   }
-  
+
   .item-description {
     margin: 0;
     padding: 10px;
   }
-  
-  .price, .quantity, .remove-item {
+
+  .price,
+  .quantity,
+  .remove-item {
     width: 100%;
     text-align: center;
   }
-  
+
   .total-price {
     position: fixed;
     bottom: 0;

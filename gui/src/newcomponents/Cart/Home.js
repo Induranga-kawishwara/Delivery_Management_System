@@ -28,11 +28,12 @@ const Home = () => {
         <div className="row justify-content-center">
           {data.map((item, index) => (
             <Itemcard
-              img={" "}
-              title={item.name}
-              desc={" "}
-              price={item.shopPrice}
-              //   item={item}
+              data={item}
+              // img={item.image}
+              // title={item.name}
+              // desc={" "}
+              // price={item.shopPrice}
+              // item={item}
               key={index}
             />
           ))}

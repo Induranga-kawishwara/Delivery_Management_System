@@ -1,95 +1,91 @@
 .cart-empty {
-    text-align: center;
-  }
-  
-  .cart-container {
-    padding: 1rem;
-  }
-  
-  .cart-header {
-    margin-bottom: 1rem;
-  }
-  
-  .cart-header h5 {
-    text-align: center;
-  }
-  
-  .cart-item {
-    width: 100%; /* This will make the cart item take the full width of its parent container. */
-    max-width: 350px; /* Adjust this value to suit your design. This prevents the cart item from getting too large. */
-    margin: 0 auto; /* This will center the cart item if it's smaller than the parent container. */
-    padding: 1rem;
-    border: 1px solid #ddd;
-    align-items: center;
-    box-sizing: border-box; /* This ensures padding and border are included in the width calculation */
-    border-radius: 15px; /* This will give you rounded corners. Adjust as needed. */
-
+  text-align: center;
 }
 
-  .cart-item {
-    border: 1px solid #ddd;
-    margin-bottom: 2rem;
-    padding: 0.5rem;
-  }
-  
-  .item-image {  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 280px; /* Adjust height as needed */
-    width: 100%; /* This ensures the container takes full width */
-    margin-bottom: 1rem; /* Spacing below the image container */
-  }
-  
-  .item-image img {
-    max-height: 100%; /* Limits the image height to container */
-    max-width: 100%; /* Limits image width, keeping aspect ratio */
-    object-fit: contain; /* Ensures the image is fully visible */
-  }
-  
-  
-  .item-details {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .item-details h6 {
-    font-size: 1.2rem; /* Adjust the font-size for mobile */
-    margin-bottom: 0.5rem;
-  }
-  
-  .item-price {
-    margin-bottom: 1rem;
-  }
-  
-  .quantity-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .quantity-controls button {
-    background-color: #17a2b8;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-  }
-  
-  .quantity-controls span {
-    margin: 10px 10px;
+.cart-container {
+  padding: 1rem;
+}
 
-  }
+.cart-header {
+  margin-bottom: 1rem;
+}
 
-  .col-remove {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.cart-header h5 {
+  text-align: center;
+}
 
-  
-  .remove-item {
+.cart-item {
+  width: 100%; /* This will make the cart item take the full width of its parent container. */
+  max-width: 350px; /* Adjust this value to suit your design. This prevents the cart item from getting too large. */
+  margin: 0 auto; /* This will center the cart item if it's smaller than the parent container. */
+  padding: 1rem;
+  border: 1px solid #ddd;
+  align-items: center;
+  box-sizing: border-box; /* This ensures padding and border are included in the width calculation */
+  border-radius: 15px; /* This will give you rounded corners. Adjust as needed. */
+}
+
+.cart-item {
+  border: 1px solid #ddd;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+.item-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 280px; /* Adjust height as needed */
+  width: 100%; /* This ensures the container takes full width */
+  margin-bottom: 1rem; /* Spacing below the image container */
+}
+
+.item-image img {
+  max-height: 100%; /* Limits the image height to container */
+  max-width: 100%; /* Limits image width, keeping aspect ratio */
+  object-fit: contain; /* Ensures the image is fully visible */
+}
+
+.item-details {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.item-details h6 {
+  font-size: 1.2rem; /* Adjust the font-size for mobile */
+  margin-bottom: 0.5rem;
+}
+
+.item-price {
+  margin-bottom: 1rem;
+}
+
+/* .quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+} */
+
+.quantity-controls button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+}
+
+.quantity-controls span {
+  margin: 10px 10px;
+}
+
+/* .col-remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.remove-item {
   padding: 0.5rem 1rem;
   background-color: #dc3545;
   color: white;
@@ -97,45 +93,45 @@
   cursor: pointer;
   width: 70%; /* This will make the button extend the full width of its container */
   border-radius: 4px;
-  
 }
-  
-  .cart-footer {
-    text-align: center;
-    margin-top: 1rem;
+
+.cart-footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.cart-footer h2 {
+  margin-bottom: 1rem;
+}
+
+/* .cart-actions {
+  display: flex;
+  justify-content: center;
+} */
+
+.clear-cart,
+.buy-now {
+  padding: 10px 20px;
+  border: none;
+  margin: 3px 10px;
+  border-radius: 8px;
+}
+
+.clear-cart {
+  background-color: #dc3545;
+  color: white;
+}
+
+.buy-now {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  /* Adjust the breakpoint as necessary */
+  .cart-item {
+    max-width: 600px; /* Or whatever maximum width you want for desktop */
+    border-radius: 15px; /* Keep consistency in border radius */
   }
-  
-  .cart-footer h2 {
-    margin-bottom: 1rem;
-  }
-  
-  .cart-actions {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .clear-cart,
-  .buy-now {
-    padding: 10px 20px;
-    border: none;
-    margin: 3px 10px;
-    border-radius: 8px;
-  }
-  
-  .clear-cart {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .buy-now {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /* Responsive adjustments */
-  @media (min-width: 768px) { /* Adjust the breakpoint as necessary */
-    .cart-item {
-      max-width: 600px; /* Or whatever maximum width you want for desktop */
-      border-radius: 15px; /* Keep consistency in border radius */
-    }
-  }
+}
