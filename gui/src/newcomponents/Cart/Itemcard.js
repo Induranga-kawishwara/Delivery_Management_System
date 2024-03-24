@@ -42,7 +42,10 @@ const ItemCard = (props) => {
     fetchCart();
     console.log("ss");
     console.log(cart);
-    preAddToCart();
+
+    if (!cart) {
+      preAddToCart();
+    }
 
     const extractedSizes = props.data.sizes.map((item) => ({
       size: item.size,
