@@ -11,6 +11,7 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = {
+      from: "emplooyee",
       email: email,
       password: password,
     };

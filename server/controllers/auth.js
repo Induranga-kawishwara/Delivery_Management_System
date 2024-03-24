@@ -7,40 +7,54 @@ import UserModel from "../modules/user.js";
 
 const authuser = async (req, res) => {
   try {
-    const { error } = validate(req.body);
-    if (error)
-      return res.status(400).send({ message: error.details[0].message });
+    // const { error } = validate(req.body);
+    // if (error)
+    //   return res.status(400).send({ message: error.details[0].message });
 
     let user;
 
-    const admin = await adminModel.findOne({ email: req.body.email });
-    const employee = await EmployeeModel.findOne({ email: req.body.email });
-    const normalUser = await UserModel.findOne({ email: req.body.email });
-
-    if (!admin && !employee && !normalUser)
-      return res.status(401).send({ message: "Invalid Email or Password" });
-
     let validPassword = false;
 
-    if (admin) {
-      validPassword = req.body.password === admin.password;
-      user = admin;
-    } else if (employee) {
-      validPassword = await bcrypt.compare(
-        req.body.password,
-        employee.password
-      );
-      user = employee;
-    } else {
+    if (req.body.from === "user") {
+      console.log("Ffff");
+      const normalUser = await UserModel.findOne({ email: req.body.email });
+      console.log(normalUser.password);
+      console.log(req.body.password);
+      if (!normalUser) {
+        return res.status(401).send({ message: "Invalid Email or Password" });
+      }
       validPassword = await bcrypt.compare(
         req.body.password,
         normalUser.password
       );
       user = normalUser;
+    } else if (req.body.from === "employee") {
+      const employee = await EmployeeModel.findOne({ email: req.body.email });
+      if (!employee) {
+        return res.status(401).send({ message: "Invalid Email or Password" });
+      }
+      validPassword = await bcrypt.compare(
+        req.body.password,
+        employee.password
+      );
+      // if (!validPassword) {
+      //   return res.status(401).send({ message: "Invalid Email or Password" });
+      // }
+      user = employee;
+    } else {
+      const admin = await adminModel.findOne({ email: req.body.email });
+      if (!admin) {
+        return res.status(401).send({ message: "Invalid Email or Password" });
+      }
+      validPassword = req.body.password === admin.password;
+      // if (!validPassword) {
+      //   return res.status(401).send({ message: "Invalid Email or Password" });
+      // }
+      user = admin;
     }
 
     if (!validPassword)
-      return res.status(401).send({ message: "Invalid Email or Password" });
+      return res.status(401).send({ message: "Invalid Password" });
 
     const token = jwt(user);
     console.log(user._id);

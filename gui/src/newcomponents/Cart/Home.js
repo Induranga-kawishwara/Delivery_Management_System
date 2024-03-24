@@ -27,15 +27,7 @@ const Home = () => {
       <section className="py-4 container">
         <div className="row justify-content-center">
           {data.map((item, index) => (
-            <Itemcard
-              data={item}
-              // img={item.image}
-              // title={item.name}
-              // desc={" "}
-              // price={item.shopPrice}
-              // item={item}
-              key={index}
-            />
+            <Itemcard data={item} key={index} />
           ))}
         </div>
       </section>
