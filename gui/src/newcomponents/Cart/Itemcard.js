@@ -5,7 +5,6 @@ import "./itemcard.css";
 const ItemCard = (props) => {
   const { addItem } = useCart();
   const [sizes, setSizes] = useState([{ size: "", shopPrice: "" }]);
-  // const [selectedSize, setSelectedSize] = useState(sizes ? sizes[0].size : " ");
   const [selectedSize, setSelectedSize] = useState({ size: "", shopPrice: "" });
 
   useEffect(() => {
@@ -23,58 +22,18 @@ const ItemCard = (props) => {
     console.log(sizes);
   }, [props.data.sizes]);
 
-  // const prices = {
-  //   "Curry Powder": {
-  //     "25g": 32.5,
-  //     "50g": 75,
-  //     "100g": 150,
-  //     "500g": 650,
-  //     "1kg": 1200,
-  //   },
-  //   "Chilli Powder": {
-  //     "25g": 45,
-  //     "50g": 90,
-  //     "100g": 180,
-  //     "500g": 700,
-  //     "1kg": 1250,
-  //   },
-  //   "Chilli Pieces": {
-  //     "25g": 45,
-  //     "50g": 90,
-  //     "100g": 180,
-  //     "500g": 700,
-  //     "1kg": 1250,
-  //   },
-  //   "Tumeric Powder": {
-  //     "25g": 75,
-  //     "50g": 150,
-  //     "100g": 300,
-  //     "500g": 950,
-  //     "1kg": 1900,
-  //   },
-  //   "Peppar Powder": {
-  //     "25g": 85,
-  //     "50g": 170,
-  //     "100g": 340,
-  //     "500g": 1300,
-  //     "1kg": 2600,
-  //   },
-  // };
-
-  // const handleAddToCart = () => {
-  //   const price = prices[props.data.productName][selectedSize]; // Get the price based on product title and selected size
-  //   addItem({
-  //     ...props.item,
-  //     size: selectedSize,
-  //     price: price,
-  //     id: props.item.id + "-" + selectedSize, // Unique identifier for each combination
-  //   });
-  // };
+  const handleAddToCart = () => {
+    const price = selectedSize.shopPrice;
+    addItem({
+      title: props.data.productName,
+      size: selectedSize.size,
+      price: selectedSize.shopPrice,
+      id: props.data._id + "-" + selectedSize.size,
+    });
+  };
 
   const handleSelectSize = (size, price) => {
     setSelectedSize({ size: size, shopPrice: price });
-
-    console.log(selectedSize);
   };
 
   return (
@@ -117,9 +76,9 @@ const ItemCard = (props) => {
           </div>
 
           <h5 className="card-title">Rs. {selectedSize.shopPrice}</h5>
-          {/* <p className="card-text">{props.desc}</p> */}
-          {/* <button className="btn btn-success" onClick={handleAddToCart}> */}
-          <button className="btn btn-success">Add to Cart</button>
+          <button className="btn btn-success" onClick={handleAddToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
