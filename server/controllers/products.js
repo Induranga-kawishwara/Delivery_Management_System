@@ -16,24 +16,72 @@ const getProducts = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    const ProductName = await ShopModel.findOne({
-      staffID: req.body.staffID,
+    const existingProduct = await ShopModel.findOne({
+      productName: req.body.productName,
     });
-    const user = await ShopModel.findOne({ email: req.body.email });
-    if (ProductName)
-      return res
-        .status(409)
-        .send({ message: "Addmin with given id already Exist!" });
 
-    if (user)
-      return res
-        .status(409)
-        .send({ message: "User with given email already Exist!" });
-    await new ShopModel(req.body).save();
-    res.status(201).send("User saved successfully!");
+    if (existingProduct) {
+      if (existingProduct.sizes && Array.isArray(existingProduct.sizes)) {
+        const sizeIndex = existingProduct.sizes.findIndex(
+          (size) => size.size === req.body.size
+        );
+
+        if (sizeIndex !== -1) {
+          existingProduct.sizes[sizeIndex].shopPrice = req.body.shopPrice;
+          await existingProduct.save();
+
+          return res.status(200).send({
+            message: "Shop price updated for the existing size of the product!",
+          });
+        }
+
+        const priceExists = existingProduct.sizes.some(
+          (size) => size.price === req.body.price
+        );
+
+        if (priceExists) {
+          return res.status(409).send({
+            message: "Price already exists for another size of the product!",
+          });
+        }
+
+        existingProduct.sizes.push({
+          size: req.body.size,
+          price: req.body.price,
+          shopPrice: req.body.shopPrice,
+        });
+        await existingProduct.save();
+
+        return res.status(200).send({
+          message:
+            "New size, price, and shop price added to the existing product!",
+        });
+      } else {
+        return res.status(500).send({
+          message:
+            "Sizes array is missing or not properly formatted in the database!",
+        });
+      }
+    }
+    console.log(req.body.productName);
+    const newProduct = new ShopModel({
+      productName: req.body.productName,
+      sizes: [
+        {
+          size: req.body.size,
+          price: req.body.price,
+          shopPrice: req.body.shopPrice,
+        },
+      ],
+      image: req.body.image,
+    });
+    console.log(newProduct);
+
+    await newProduct.save();
+    res.status(201).send("Product saved successfully!");
   } catch (error) {
-    console.error("Error adding user:", error);
-    res.status(500).send("Error adding user");
+    console.error("Error adding product:", error);
+    res.status(500).send("Error adding product");
   }
 };
 

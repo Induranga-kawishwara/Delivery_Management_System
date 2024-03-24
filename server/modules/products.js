@@ -5,18 +5,22 @@ const ProductsSchema = new Schema({
     type: String,
     required: true,
   },
-  price: {
-    type: String,
-    required: true,
-  },
-  shopPrice: {
-    type: String,
-    required: true,
-  },
-  size: {
-    type: String,
-    required: true,
-  },
+  sizes: [
+    {
+      size: {
+        type: String,
+        required: true,
+      },
+      price: {
+        type: String,
+        required: true,
+      },
+      shopPrice: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   image: {
     type: String,
     required: true,
