@@ -60,7 +60,7 @@ const ItemCard = (props) => {
 
   const handleAddToCart = async () => {
     addItem({
-      img: "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg",
+      img: props.data.image,
       title: props.data.productName,
       size: selectedSize.size,
       price: selectedSize.shopPrice,
@@ -71,7 +71,7 @@ const ItemCard = (props) => {
       title: props.data.productName,
       size: selectedSize.size,
       price: selectedSize.shopPrice,
-      image: "https://example.com/image.jpg",
+      image: props.data.image,
       productid: props.data._id + "-" + selectedSize.size,
     };
     try {
@@ -94,7 +94,7 @@ const ItemCard = (props) => {
     <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
       <div className="card p-0 overflow-hidden h-100 shadow">
         <img
-          src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg"
+          src={props.data.image}
           className="card-img-top img-fluid"
           alt={props.data.productName}
         />

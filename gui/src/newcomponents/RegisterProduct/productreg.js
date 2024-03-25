@@ -1,10 +1,13 @@
-import Dropdown from "react-bootstrap/Dropdown";
 import TheFooter from "../footer/TheFooter";
 import TheNav from "../navbar/TheNav";
 import React, { useState } from "react";
-import "./style.css";
 import axios from "axios";
-import Image from "../../imageConverter/imageConverter";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../../config/firebase.config.js";
+
+// Initialize Firebase app
+initializeApp(firebaseConfig.firebaseConfig);
 
 export default function Profile() {
   const [secretKey, setSecretKey] = useState("");
@@ -12,46 +15,67 @@ export default function Profile() {
   const [size, setSize] = useState("");
   const [productprice, setProductprice] = useState("");
   const [shopprice, setShopprice] = useState("");
-  const [isChecked, setIsChecked] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
   const [img, setImg] = useState("");
+  const [file, setFile] = useState(null);
+  const storage = getStorage();
 
-  const [file, setFile] = useState(" ");
-  async function handleChange(e) {
-    setFile(await Image(e.target.files[0]));
-    setImg(URL.createObjectURL(e.target.files[0]));
-  }
-  const addProduct = () => {
-    const payload = {
-      productName: productname,
-      price: productprice,
-      shopPrice: shopprice,
-      size: size,
-      image: img,
-    };
+  const handleChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFile(imageFile);
+    setImg(URL.createObjectURL(imageFile));
+  };
 
-    axios
-      .post("http://localhost:5000/product", payload)
-      .then((response) => {
-        console.log("Product added successfully:", response.data);
-        setProductname("");
-        setSize("");
-        setProductprice("");
-        setShopprice("");
-        setIsChecked("");
-        setImg("");
-        setSecretKey("");
-        alert(response.data);
-      })
-      .catch((error) => {
-        console.error("Error adding product:", error);
-        alert(error.response.data.message);
-      });
+  const uploadImageToFirebase = async () => {
+    if (!file) return null;
+
+    const storageRef = ref(storage, `product_images/${file.name}`);
+
+    try {
+      await uploadBytes(storageRef, file);
+      console.log("Image uploaded successfully!");
+      const downloadURL = await getDownloadURL(storageRef);
+      console.log("Download URL:", downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
+  };
+
+  const addProduct = async () => {
+    try {
+      const downloadURL = await uploadImageToFirebase();
+      const payload = {
+        productName: productname,
+        price: productprice,
+        shopPrice: shopprice,
+        size: size,
+        image: downloadURL,
+      };
+
+      const response = await axios.post(
+        "http://localhost:5000/product",
+        payload
+      );
+      console.log("Product added successfully:", response.data);
+      setProductname("");
+      setSize("");
+      setProductprice("");
+      setShopprice("");
+      setIsChecked(false);
+      setImg("");
+      setFile(null);
+      alert(response.data);
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert(error.response.data.message);
+    }
   };
 
   const productreg = (e) => {
     e.preventDefault();
     if (secretKey != "12187@") {
-      e.preventDefault();
       alert("Invalid Admin");
     } else {
       e.preventDefault();

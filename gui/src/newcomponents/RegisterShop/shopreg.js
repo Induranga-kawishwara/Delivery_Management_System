@@ -4,7 +4,14 @@ import TheNav from "../navbar/TheNav";
 import React, { useState } from "react";
 import "./style.css";
 import axios from "axios";
-import Image from "../../imageConverter/imageConverter";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../../config/firebase.config.js";
+
+// Initialize Firebase app
+initializeApp(firebaseConfig.firebaseConfig); // Accessing the firebaseConfig property
+
+// Your other code goes here...
 
 export default function Profile() {
   const [shopname, setShopname] = useState("");
@@ -20,15 +27,32 @@ export default function Profile() {
   const [typeresturent, setTypeResturent] = useState("");
   const [checked, setIsCheckedShop] = useState("");
   const [img, setImg] = useState("");
+  const [file, setFile] = useState(null);
+  const storage = getStorage();
 
-  const [file, setFile] = useState(" ");
   async function handleChange(e) {
-    setFile(await Image(e.target.files[0]));
-    // console.log(e.target.files);
+    setFile(e.target.files[0]);
     setImg(URL.createObjectURL(e.target.files[0]));
   }
 
-  const RegisterShop = (e) => {
+  const uploadFileToFirebase = async () => {
+    if (!file) return null;
+
+    const storageRef = ref(storage, `files/${file.name}`);
+
+    try {
+      await uploadBytes(storageRef, file);
+      console.log("File uploaded successfully!");
+      const downloadURL = await getDownloadURL(storageRef);
+      console.log("Download URL:", downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      throw error;
+    }
+  };
+
+  const RegisterShop = async (downloadURL) => {
     const postData = {
       shopId: shopid,
       shopName: shopname,
@@ -40,36 +64,33 @@ export default function Profile() {
       location: shoplocation,
       regisDate: new Date(shopregdate),
       TypeRtestent: typeresturent,
-      img: file,
+      img: downloadURL,
     };
 
-    // Send the POST request
-    axios
-      .post("http://localhost:5000/shop", postData)
-      .then((response) => {
-        console.log("Data posted successfully:", response.data);
-        setShopname("");
-        setStitle("");
-        setShopownername("");
-        setShopnumber("");
-        setShopNo("");
-        setShopStreet("");
-        setShoCity("");
-        setShopLocation("");
-        setShopID("");
-        setRegdate("");
-        setTypeResturent("");
-        setIsCheckedShop("");
-        setFile("");
-        alert(response.data);
-      })
-      .catch((error) => {
-        console.log(file);
-        alert(error.response.data.message);
-      });
+    try {
+      // Send the POST request
+      const response = await axios.post("http://localhost:5000/shop", postData);
+      console.log("Data posted successfully:", response.data);
+      setShopname("");
+      setStitle("");
+      setShopownername("");
+      setShopnumber("");
+      setShopNo("");
+      setShopStreet("");
+      setShoCity("");
+      setShopLocation("");
+      setShopID("");
+      setRegdate("");
+      setTypeResturent("");
+      setIsCheckedShop("");
+      setFile(null);
+      alert(response.data);
+    } catch (error) {
+      console.error("Error posting data:", error);
+      alert(error.response.data.message);
+    }
   };
-
-  const shopsubmit = (e) => {
+  const shopsubmit = async (e) => {
     e.preventDefault();
     if (
       !shopname &&
@@ -131,7 +152,15 @@ export default function Profile() {
       alert("Comfirm the Documents");
       return;
     }
-    RegisterShop();
+    try {
+      const downloadURL = await uploadFileToFirebase();
+      if (downloadURL) {
+        RegisterShop(downloadURL);
+      }
+    } catch (error) {
+      console.error("Error uploading file and registering shop:", error);
+      alert("Error uploading file and registering shop. Please try again.");
+    }
   };
   return (
     <div>
